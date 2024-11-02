@@ -74,7 +74,7 @@ def left_click_event(coordinates_tuple):
 
 def main():
     #la version 1 añade inserts
-    database=SqliteClient(2)
+    database=SqliteClient(1)
     # create tkinter window
     root_tk = Tk()
     root_tk.geometry(f"{900}x{800}")
