@@ -8,17 +8,26 @@ Está dividido en dos partes:
 2. Flet: Utilizando la librería flet que permite crear aplicaciones web, ios y android utilziando python pero con componentes prediseñados.
 3. Android: utilizando kotlin
 
+# ¿Como obtener los límites de las regiones para hacer polígonos?
+
+<a href="docs/obtener-limites.md">Pincha aquí</a>
 
 # tkintermapview
 
-Es un programa de TomSchimansky: https://github.com/TomSchimansky/TkinterMapView?tab=readme-ov-file#importing
+Para trabajar con mapas podemos utiliazr las librerías
+-folium: https://stackoverflow.com/questions/60836108/how-to-add-unique-popups-to-each-geojson-polygon-in-folium-using-python
+-tkintermapview: https://github.com/TomSchimansky/TkinterMapView
 
-Se conecta al servidor openstreetmap: https://es.wikipedia.org/wiki/OpenStreetMap, https://www.openstreetmap.org/#map=6/40.01/-2.49
+
+
+Aunque puedes configurar el servidor en tkintermapview, este se conecta al servidor openstreetmap: https://www.openstreetmap.org/#map=6/40.01/-2.49, https://es.wikipedia.org/wiki/OpenStreetMap
 
 1. Crea u entorno virtual con "python -m venv venv"
 2. Activa el entorno virtual con "source venv/bin/activate" en linux o "venv\Scripts\activate.bat" en windows
 3. Selecciona el python interpreter en vscode
 4. escribe en el terminal: pip install tkintermapview
+
+
  
  
 <img src="docs/tkintermapview1.JPG" width="500">

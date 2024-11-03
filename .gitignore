@@ -1,7 +1,7 @@
 tkintermapview/database.db
 tkintermapview/venv
 tkintermapview/data/__pycache__
-
+tkintermapview/__pycache__/
 
 flet/venv
 
