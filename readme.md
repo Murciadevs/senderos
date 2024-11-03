@@ -14,9 +14,11 @@ Está dividido en dos partes:
 
 # tkintermapview
 
-Para trabajar con mapas podemos utiliazr las librerías
--folium: https://stackoverflow.com/questions/60836108/how-to-add-unique-popups-to-each-geojson-polygon-in-folium-using-python
+Para trabajar con mapas desde python podemos utiliazr las librerías
+
 -tkintermapview: https://github.com/TomSchimansky/TkinterMapView
+
+-folium: https://stackoverflow.com/questions/60836108/how-to-add-unique-popups-to-each-geojson-polygon-in-folium-using-python
 
 
 
