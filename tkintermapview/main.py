@@ -46,7 +46,6 @@ def main():
     Label(options_frame, text="Senderos",pady=5).pack()
     listBox_senderos=Listbox(options_frame, width=20, height=10)
     listBox_senderos.bind('<<ListboxSelect>>', lambda e: myMap.mostrar_senderos())
-    listBox_senderos.select_set(1)
     listBox_senderos.pack()
     text_nuevo_sendero=Text(options_frame, pady=5, bg='white', fg='black', bd=2, height=1, width=20)
     text_nuevo_sendero.pack()
@@ -56,13 +55,11 @@ def main():
     button_borrar_sendero_activo.pack()
     
 
-
     main_frame=Frame(root_tk, width=width, height=height-200, padx=50, bg=color_fondo)
     main_frame.pack()
 
     foot_frame=Frame(root_tk, width=width, height=100, bg=color_fondo)
     foot_frame.pack()
-    #foot_frame.propagate(False)
     text_consulta=Text(foot_frame, bg='white', fg='black', bd=2, font=('Helvetica', 9, 'bold'), height=1)
     text_consulta.place(x=0,y=10)
     text_resultados=Text(foot_frame, bg='white', fg='black', bd=2, font=('Helvetica', 9, 'bold'), height=4)
@@ -75,6 +72,7 @@ def main():
     senderos=myMap.get_senderos()
     for sendero in senderos:
         listBox_senderos.insert(END, sendero[1])
+    listBox_senderos.select_set(0)
 
     
     root_tk.mainloop()

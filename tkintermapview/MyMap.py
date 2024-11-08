@@ -18,7 +18,7 @@ class MyMap:
         #self.map_widget.grid(row=1,column=1,columnspan=4, rowspan=3, padx=10, pady=10)
         self.map_widget.pack(side=LEFT)
         self.map_widget.add_right_click_menu_command(label="Añade un marcador", command=lambda coords:self.add_marker_event(coords), pass_coords=True)
-        self.map_widget.add_right_click_menu_command(label="Añadir coordenada a ruta activa", command=lambda coords:self.add_coordenada_ruta_activa(coords), pass_coords=True)
+        self.map_widget.add_right_click_menu_command(label="Añadir coordenada al sendero activo", command=lambda coords:self.add_coordenada_sendero_activo(coords), pass_coords=True)
         self.map_widget.add_right_click_menu_command(label="Mostrar poligono de esta región", command=lambda:self.mostrar_poligono_del_lugar_actual(), pass_coords=False)
         self.map_widget.add_right_click_menu_command(label="Borrar poligono de esta región", command=lambda:self.borrar_poligono(), pass_coords=False)
         self.map_widget.add_left_click_map_command(self.left_click_event)
@@ -30,7 +30,8 @@ class MyMap:
 
         self.poligonos=[]
         self.paths=[]
-       
+        self.sendero_activo=None
+    
     def cambiar_server(self, number_server):
         if (number_server == 0): self.map_widget.set_tile_server("https://a.tile.openstreetmap.org/{z}/{x}/{y}.png")  # OpenStreetMap (default)
         elif (number_server == 1):self.map_widget.set_tile_server("https://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}&s=Ga", max_zoom=22)  # google normal
@@ -60,15 +61,20 @@ class MyMap:
     ###############################################
     # Senderos
     ###############################################
-
     def crear_sendero(self, textBox:Text):
-        sendero=textBox.get("1.0", "end-1c")
-        if(len(sendero)==0):
+        """
+        Obtiene el nombre del sendero del textbos y 
+        crea un sendero en la base de datos y  el listbox
+        """
+        nombre_sendero=textBox.get("1.0", "end-1c")
+        if(len(nombre_sendero)==0):
             showinfo("Error", "El nombre del sendero está vacío")
         else:
-            self.routesModel.insert(sendero)
+            self.routesModel.insert(nombre_sendero)
+            self.listBox.select_clear(0,END)
+            self.listBox.insert(END, nombre_sendero)
+            self.listBox.selection_set(END)
             showinfo("Mensaje", "Nuevo sendero creado")
-            self.listBox.insert(END, sendero)
             
     def borrar_sendero(self):
         currentSelection=self.listBox.curselection()
@@ -76,7 +82,7 @@ class MyMap:
             item=self.listBox.get(currentSelection)
             print("El item recibido es: ",item[0],", name: ",item[1])
             #Borramos todas sus paths del mapa
-            for path in self.paths:
+            for path in self.paths:  
                 path.delete()
             #path_1.remove_position(position)
             #borramos todas sus coordenadas
@@ -84,6 +90,7 @@ class MyMap:
             #Lo borramos de la tabla routes
             self.routesModel.delete(item[0])
             #Lo borramos de la lista
+
             self.listBox.delete(currentSelection)
 
             showinfo("Mensaje", "Sendero borrado")
@@ -130,10 +137,11 @@ class MyMap:
                     long=coordinate[2]
                     #print(lat,long)
                     sendero_activo_lat_long.append((lat,long))
-                path=self.map_widget.set_path(sendero_activo_lat_long)
-                self.paths.append(path)
+                self.sendero_activo=self.map_widget.set_path(sendero_activo_lat_long)
+                self.paths.append(self.sendero_activo)
+                
 
-    def add_coordenada_ruta_activa(self, coords):
+    def add_coordenada_sendero_activo(self, coords):
         currentSelection=self.listBox.curselection()
         if(currentSelection.__len__()!=0):
             item=self.listBox.get(currentSelection)
@@ -144,6 +152,10 @@ class MyMap:
             self.mostrar_senderos()
         else:
             showinfo("Error", "Please select a route")
+
+
+    def get_sendero_activo(self):
+        return self.sendero_activo
     ###############################################
     # Fin de senderos
     ###############################################       

@@ -42,7 +42,7 @@ El componente mapa está aquí: https://flet.dev/docs/controls/map/
 
 1. Instala flet con pip install flet
 2. Ejecuta la aplicación situandote en la carpeta del proyecto  y escribe en el terminal "flet run"
-3. Crea una aplicación android con flet
+3. Crea una aplicación android con flet, mira este artículo si tienes dudas: https://murciadevs.tipolisto.es/exportando-flet-a-android/
 
 
 <img src="docs/flet1.JPG" width="500">
